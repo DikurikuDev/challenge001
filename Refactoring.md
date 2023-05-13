@@ -11,4 +11,5 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 ## Your Explanation Here
 
 First, I added the tests to cover all input possibilities.
- 
+
+Then, I removed all else and nested if clauses by guard clauses refactoring.
