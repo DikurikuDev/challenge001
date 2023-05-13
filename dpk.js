@@ -19,11 +19,7 @@ exports.deterministicPartitionKey = (event) => {
     return TRIVIAL_PARTITION_KEY;
   }
 
-  let candidate = event;
-  if (event.partitionKey) {
-    candidate = event.partitionKey;
-  }
-  candidate = _asString(candidate);
+  const candidate = _asString(event.partitionKey || event);
 
   if (event.partitionKey && candidate.length <= MAX_PARTITION_KEY_LENGTH) {
     return candidate;
