@@ -17,3 +17,5 @@ Then, I removed all else and nested if clauses by guard clauses refactoring.
 Then, I changed the function to return hash when partitionKey was not provided.
 
 Then, I extracted the duplicated code in internal functions.
+
+Then, I grouped all logic to select the candidate and created a guard clause for when it should not be hash.

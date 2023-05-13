@@ -1,34 +1,33 @@
 const crypto = require("crypto");
 
-function _toString(data) {
+function _asString(data) {
   if (typeof data === "string") {
     return data;
   }
   return JSON.stringify(data);
 }
 
-function _toHash(data) {
+function _asHash(data) {
   return crypto.createHash("sha3-512").update(data).digest("hex");
 }
 
 exports.deterministicPartitionKey = (event) => {
   const TRIVIAL_PARTITION_KEY = "0";
   const MAX_PARTITION_KEY_LENGTH = 256;
-  let candidate;
 
   if (!event) {
     return TRIVIAL_PARTITION_KEY;
   }
 
-  if (!event.partitionKey) {
-    return _toHash(_toString(event));
+  let candidate = event;
+  if (event.partitionKey) {
+    candidate = event.partitionKey;
   }
-  
-  candidate = _toString(event.partitionKey);
+  candidate = _asString(candidate);
 
-  if (candidate.length > MAX_PARTITION_KEY_LENGTH) {
-    return _toHash(candidate)
+  if (event.partitionKey && candidate.length <= MAX_PARTITION_KEY_LENGTH) {
+    return candidate;
   }
 
-  return candidate;
+  return _asHash(candidate);
 };
