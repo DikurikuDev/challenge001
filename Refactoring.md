@@ -15,3 +15,5 @@ First, I added the tests to cover all input possibilities.
 Then, I removed all else and nested if clauses by guard clauses refactoring.
 
 Then, I changed the function to return hash when partitionKey was not provided.
+
+Then, I extracted the duplicated code in internal functions.
